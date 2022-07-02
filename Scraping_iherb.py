@@ -1,4 +1,5 @@
 import requests
+import xlsxwriter
 from bs4 import BeautifulSoup
 import json
 from time import sleep
@@ -32,8 +33,23 @@ def one_block():
             'price': price,
         })
 
-    with open('Promotions_1.json'.replace(' ', ''), 'w', encoding='utf-8') as file:
-        json.dump(items, file, indent=4, sort_keys=True, ensure_ascii=False)
+    book = xlsxwriter.Workbook('Promotions_1.xlsx')
+    page = book.add_worksheet()
+
+    row = 0
+    colum = 0
+
+    page.set_column('A:A', 60)
+    page.set_column('B:B', 30)
+    page.set_column('C:C', 30)
+
+    for i in items:
+        page.write(row, colum, i['name'])
+        page.write(row, colum + 1, i['rank'])
+        page.write(row, colum + 2, i['price'])
+        row += 1
+
+    book.close()
 
 
 def two_block():
@@ -55,8 +71,23 @@ def two_block():
             'price': price,
         })
 
-    with open('Trend_2.json'.replace(' ', ''), 'w', encoding='utf-8') as file:
-        json.dump(item, file, indent=4, sort_keys=True, ensure_ascii=False)
+    book = xlsxwriter.Workbook('Trend.xlsx')
+    page = book.add_worksheet()
+
+    row = 0
+    colum = 0
+
+    page.set_column('A:A', 60)
+    page.set_column('B:B', 30)
+    page.set_column('C:C', 30)
+
+    for i in item:
+        page.write(row, colum, i['name'])
+        page.write(row, colum + 1, i['rank'])
+        page.write(row, colum + 2, i['price'])
+        row += 1
+
+    book.close()
 
 
 def three_block():
@@ -78,8 +109,23 @@ def three_block():
             'price': price
         })
 
-    with open('Hits_3.json'.replace(' ', ''), 'w', encoding='utf-8') as file:
-        json.dump(item, file, indent=4, sort_keys=True, ensure_ascii=False)
+    book = xlsxwriter.Workbook('Hits.xlsx')
+    page = book.add_worksheet()
+
+    row = 0
+    colum = 0
+
+    page.set_column('A:A', 60)
+    page.set_column('B:B', 30)
+    page.set_column('C:C', 30)
+
+    for i in item:
+        page.write(row, colum, i['name'])
+        page.write(row, colum + 1, i['rank'])
+        page.write(row, colum + 2, i['price'])
+        row += 1
+
+    book.close()
 
 
 def main():
